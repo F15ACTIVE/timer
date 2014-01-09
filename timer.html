@@ -1,0 +1,63 @@
+<DOCTYPE!>
+<html>
+<header>
+<style>
+body{
+background:#111111;
+}
+#timer{
+margin-top:10%;
+padding:5% 0px 5% 0px;
+background:#131313;color:#0091ff;
+text-align:center;
+font-family:"Lucida Console";cursor:pointer;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</header>
+<body>
+<div id='timer'>0:0:0.0</div>
+</body>
+</html>
+
+<script>
+var timer_interval;
+var font_size;
+var font_factor = 7;
+
+font_size = $(window).width()/font_factor;
+$('#timer').css("font-size", font_size);
+
+$(window).resize(function(){
+  font_size = $(window).width()/font_factor;
+  $('#timer').css("font-size", font_size);
+});
+
+$('#timer').click(function(){
+ clearInterval(timer_interval);
+
+ var h = 0;
+ var m = 0;
+ var s = 0;
+ var ms = 0;
+
+ timer_interval = setInterval(function(){
+  ms = ms + 1;
+  if (ms > 9){
+   ms = 0;
+   s = s + 1;
+    if (s > 59){
+     s = 0;
+     m = m + 1;
+      if (m > 59){
+       m = 0;
+       h = h + 1;
+      }
+    }
+  }
+  var time = h+':'+m+':'+s+'.'+ms;
+  $('#timer').text(time);
+ }, 100);
+});
+
+</script>
